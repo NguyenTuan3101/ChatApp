@@ -11,7 +11,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import {FacebookSocialButton, GoogleSocialButton} from 'react-native-social-buttons'
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -29,12 +28,11 @@ const Login = withTheme(props => {
   }, []);
 
   //google
-  const [userInfor, setUserInfor] = useState();
   const [request, response, promptAsync] = Google.useAuthRequest({
     responseType: "id_token",
+    expoClientId:'731270731716-vpjise0omcgfnna8sjfnn0td25kd3obq.apps.googleusercontent.com',
     iosClientId:'731270731716-1s0h84j24ul0jkfpr2q5cbt2hipj3ss8.apps.googleusercontent.com',
     androidClientId:'731270731716-i8por7jf3gouqc2fl5562ct52r6tohv3.apps.googleusercontent.com',
-    expoClientId:'731270731716-vpjise0omcgfnna8sjfnn0td25kd3obq.apps.googleusercontent.com',
   });
 
   useEffect(() => {
@@ -164,8 +162,6 @@ const Login = withTheme(props => {
         </TouchableOpacity>
       </View>
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <FacebookSocialButton onPress={''}>
-        </FacebookSocialButton>
         <GoogleSocialButton onPress={() => promptAsync()}>
         </GoogleSocialButton>
       </View>
