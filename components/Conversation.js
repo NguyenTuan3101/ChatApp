@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { withTheme } from "@rneui/themed/dist/config";
-import { Text, FlatList, View, Pressable } from "react-native";
+import { ImageBackground, StyleSheet, Text, FlatList, View, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { listenForConversations, openConversation } from "../firebase";
 import { useFocusEffect } from '@react-navigation/native';
@@ -21,6 +21,24 @@ const Conversation = withTheme((props) => {
             };
         }, [])
     );
+    const image = require('../assets/background.png');
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+        },
+        image: {
+            flex: 1,
+            justifyContent: 'center',
+        },
+        text: {
+            color: 'white',
+            fontSize: 42,
+            lineHeight: 84,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            backgroundColor: '#000000c0',
+        },
+    });
 
     const renderConversation = (item) => {
         const uc = item.item

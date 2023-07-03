@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ActivityIndicator, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
+import {ActivityIndicator, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import validator from "validator";
 import { withTheme } from '@rneui/themed';
 
@@ -8,7 +8,7 @@ import { auth } from "../firebase"
 import { showToast } from '../utils';
 import UserContext from '../context';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {FacebookSocialButton, GoogleSocialButton} from 'react-native-social-buttons'
+import {GoogleSocialButton} from 'react-native-social-buttons'
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
 
@@ -103,7 +103,7 @@ const Login = withTheme(props => {
       flex: 1,
       padding: 20,
     }}>
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Image style={{ height: 200, width: 200 }} resizeMode={"contain"} source={require('../assets/logolight.png')} />
       </View>
       <View style={{ flex: 1 }}>
@@ -165,8 +165,10 @@ const Login = withTheme(props => {
         <GoogleSocialButton onPress={() => promptAsync()}>
         </GoogleSocialButton>
       </View>
+      
     </SafeAreaView>
   );
+  
 });
 
 export default Login;
