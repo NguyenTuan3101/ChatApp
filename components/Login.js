@@ -3,25 +3,47 @@ import { ActivityIndicator, Text, TextInput, TouchableOpacity, View, Image } fro
 import validator from "validator";
 import { withTheme } from '@rneui/themed';
 
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { GoogleAuthProvider, onAuthStateChanged, signInWithCredential, signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../firebase"
 import { showToast } from '../utils';
 import UserContext from '../context';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import {FacebookSocialButton, GoogleSocialButton} from 'react-native-social-buttons'
+import * as Google from "expo-auth-session/providers/google";
+import * as WebBrowser from "expo-web-browser";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+WebBrowser.maybeCompleteAuthSession();
 
 const Login = withTheme(props => {
   const { theme } = props;
-  const { navigate } = props.navigation;
+  const { navigate } =  props.navigation;
   const { setCurrentUser } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
   useEffect(() => {
     return () => {
       setIsLoading(false);
     }
   }, []);
+
+  //google
+  const [userInfor, setUserInfor] = useState();
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    responseType: "id_token",
+    iosClientId:'731270731716-1s0h84j24ul0jkfpr2q5cbt2hipj3ss8.apps.googleusercontent.com',
+    androidClientId:'731270731716-i8por7jf3gouqc2fl5562ct52r6tohv3.apps.googleusercontent.com',
+    expoClientId:'731270731716-vpjise0omcgfnna8sjfnn0td25kd3obq.apps.googleusercontent.com',
+  });
+
+  useEffect(() => {
+    if(response?.type == "success"){
+      const {id_token} = response.params;
+      const credential = GoogleAuthProvider.credential(id_token);
+      signInWithCredential(auth, credential);
+    }
+  }, [response]);
 
   const login = async () => {
     if (validator.isEmpty(email)) {
@@ -140,6 +162,12 @@ const Login = withTheme(props => {
             <Text style={{ color: theme.colors.primary }} > Sign Up</Text>
           </Text>
         </TouchableOpacity>
+      </View>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <FacebookSocialButton onPress={''}>
+        </FacebookSocialButton>
+        <GoogleSocialButton onPress={() => promptAsync()}>
+        </GoogleSocialButton>
       </View>
     </SafeAreaView>
   );

@@ -3,16 +3,8 @@ import { getAuth, updateProfile } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc, getFirestore, query, where, collection, getDocs, limit, startAfter, addDoc, serverTimestamp, getDoc, runTransaction, deleteDoc, onSnapshot, arrayRemove, arrayUnion, orderBy } from "firebase/firestore";
 
-// const firebaseConfig = {
-//     apiKey: "AIzaSyATZpkn1E6tEWFA10yt3haWz5_LtFVUDLE",
-//     authDomain: "madproject-31890.firebaseapp.com",
-//     databaseURL: "https://madproject-31890-default-rtdb.asia-southeast1.firebasedatabase.app",
-//     projectId: "madproject-31890",
-//     storageBucket: "madproject-31890.appspot.com",
-//     messagingSenderId: "204873418373",
-//     appId: "1:204873418373:web:bb577772b18e530a6f8bec"
-// };
-
+//iOS: 731270731716-1s0h84j24ul0jkfpr2q5cbt2hipj3ss8.apps.googleusercontent.com
+//android: 731270731716-i8por7jf3gouqc2fl5562ct52r6tohv3.apps.googleusercontent.com
 const firebaseConfig = {
     apiKey: "AIzaSyAlUDWp2F7vDDxHx_9tWJnPZ-SMfQblN1Y",
     authDomain: "chat-social-app.firebaseapp.com",
